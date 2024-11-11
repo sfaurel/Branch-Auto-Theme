@@ -3,6 +3,7 @@
   "displayName": "BranchAutoTheme",
   "description": "BranchAutoTheme is a Visual Studio Code extension created to automatically adjust your editor's theme based on the active Git branch.",
   "version": "0.0.1",
+  "publisher": "sfaurel",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -11,7 +12,7 @@
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
-  "icon": ".assets/logo.png",
+  "icon": "./assets/logo.png",
   "contributes": {
     "commands": [
       {
@@ -72,5 +73,10 @@
     "typescript": "^5.6.3",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sfaurel/Branch-Auto-Theme"
+  },
+  "homepage": "https://github.com/sfaurel/Branch-Auto-Theme/blob/main/README.md"
 }
