@@ -7,10 +7,11 @@
     "vscode": "^1.95.0"
   },
   "categories": [
-    "Other"
+    "Visualization"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
+  "icon": ".assets/logo.png",
   "contributes": {
     "commands": [
       {
@@ -23,7 +24,35 @@
         "title": "Deactivate",
         "category": "Branch Auto Theme"
       }
-    ]
+    ],
+    "configuration": {
+      "properties": {
+        "branchAutoTheme.branchMappings": {
+          "type": "object",
+          "properties": {
+            "protected": {
+              "type": "string",
+              "default": "main, master"
+            },
+            "develop": {
+              "type": "string",
+              "default": "develop"
+            },
+            "feature": {
+              "type": "string",
+              "default": "feature/*"
+            }
+          },
+          "additionalProperties": false,
+          "default": {
+						"protected": "main, master",
+						"develop": "develop",
+						"feature": "feature/*"
+					},
+          "markdownDescription": "Map a list of comma-separated branch names or patterns."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
