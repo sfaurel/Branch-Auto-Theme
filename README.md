@@ -1,71 +1,64 @@
-# branch-auto-theme README
 
-This is the README for your extension "branch-auto-theme". After writing up a brief description, we recommend including the following sections.
+**Branch Auto Theme** is a Visual Studio Code extension designed to automatically adjust your editor's theme based on the active Git branch. By giving each branch group a unique theme, Branch Auto Theme helps you visually identify your working environment and avoid accidental edits in the wrong branch. This seamless integration enhances productivity, reducing context-switching errors, making it ideal for developers who frequently work across multiple branches.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+
+- Displays the current branch type directly in the status bar for developers who prefer a subtle, non-intrusive branch indication. Providing visibility into the active branch context with a status bar item for each branch type:
+
+  ![Protected](https://img.shields.io/badge/⚠️_Protected-red) ![Develop](https://img.shields.io/badge/Develop-gray) ![Feature](https://img.shields.io/badge/Feature-gray) ![Unmanaged](https://img.shields.io/badge/⚠️_Unmanaged-yellow)
+
+- **Customizable branch mappings**: Users can configure their own branch types directly in the settings `branchAutoTheme.branchMappings` to match their specific workflow.
+
+<!-- Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
 For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/feature-x.png\)
+\!\[feature X\]\(images/feature-x.png\) -->
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+<!-- > Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow. -->
 
-## Requirements
+<!-- ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+If you have any requirements or dependencies, add a section describing those and how to install and configure them. -->
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+In the settings, users can customize the branches that match each branch category, allowing them to configure specific branches to match their workflow.
 
-For example:
+`branchAutoTheme.branchMappings`: Configure which Git branches correspond to each branch type. Values are comma-separated branch names or patterns that define which branches belong to each category.
 
-This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Example configuration:
 
+```json
+{
+  "branchAutoTheme.branchMappings": {
+    "protected": "main, master",
+    "develop": "develop",
+    "feature": "feature/*"
+  }
+}
+```
+
+<!-- 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Calling out known issues can help limit users opening duplicate issues against your extension. -->
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
+Initial version of **Branch Auto Theme**, providing current branch context in status bar item
+- Detects the active branch type (Protected, Develop, Feature, Other).
+- Displays the corresponding type as status bar indicator.
+- Customizable Branch Mappings.
 
-Initial release of ...
+## Next Steps
 
-### 1.0.1
+- [ ] Add theme mode for branch types.
+- [ ] Implement mode selector: "Theme", "Status Bar Item", "Both", or "Off".
+- [ ] Enhance error handling for unsupported branch patterns.
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Thank you to everyone who contributes ideas, reports bugs, or suggests improvements—your help makes this project better

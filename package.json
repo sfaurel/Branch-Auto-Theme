@@ -3,14 +3,16 @@
   "displayName": "BranchAutoTheme",
   "description": "BranchAutoTheme is a Visual Studio Code extension created to automatically adjust your editor's theme based on the active Git branch.",
   "version": "0.0.1",
+  "publisher": "sfaurel",
   "engines": {
     "vscode": "^1.95.0"
   },
   "categories": [
-    "Other"
+    "Visualization"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
+  "icon": "./assets/logo.png",
   "contributes": {
     "commands": [
       {
@@ -23,7 +25,35 @@
         "title": "Deactivate",
         "category": "Branch Auto Theme"
       }
-    ]
+    ],
+    "configuration": {
+      "properties": {
+        "branchAutoTheme.branchMappings": {
+          "type": "object",
+          "properties": {
+            "protected": {
+              "type": "string",
+              "default": "main, master"
+            },
+            "develop": {
+              "type": "string",
+              "default": "develop"
+            },
+            "feature": {
+              "type": "string",
+              "default": "feature/*"
+            }
+          },
+          "additionalProperties": false,
+          "default": {
+						"protected": "main, master",
+						"develop": "develop",
+						"feature": "feature/*"
+					},
+          "markdownDescription": "Map a list of comma-separated branch names or patterns."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -43,5 +73,10 @@
     "typescript": "^5.6.3",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sfaurel/Branch-Auto-Theme"
+  },
+  "homepage": "https://github.com/sfaurel/Branch-Auto-Theme/blob/main/README.md"
 }
