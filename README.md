@@ -28,6 +28,14 @@ For example if there is an image subfolder under your extension project workspac
 
 If you have any requirements or dependencies, add a section describing those and how to install and configure them. -->
 
+## Usage
+
+To start using **Branch Auto Theme**, configure the settings first. You can use the **Command Palette** (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS) to run the command:
+
+`Branch Auto Theme: Select theme for each branch types`
+
+This allows you to assign themes to each branch type.
+
 ## Extension Settings
 
 In the settings, users can customize the branches that match each branch category, allowing them to configure specific branches to match their workflow.
@@ -76,4 +84,5 @@ Moved to [CHANGELOG.md](./CHANGELOG.md)
 - [x] Add theme mode for branch types.
 - [x] Implement mode selector: `Theme`, `Status Bar Item`, `Both`, or `Off`.
 - [ ] Work test cases
+
 Thank you to everyone who contributes ideas, reports bugs, or suggests improvements—your help makes this project better
