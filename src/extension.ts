@@ -20,6 +20,26 @@ export function activate(context: vscode.ExtensionContext) {
 	branchStatusBarItem.show();
 
 
+	const isFirstActivation = !context.globalState.get('hasBeenActivated');
+	console.log(context.globalState);
+
+    if (isFirstActivation) {
+        // Show a toast message to the user
+        vscode.window.showInformationMessage(
+            'Thank you for installing Branch Auto Theme! Please configure the extension settings.',
+            'Configure Now'
+        ).then(selection => {
+            if (selection === 'Configure Now') {
+                // Open the settings JSON file or a specific configuration page
+                vscode.commands.executeCommand('branchAutoTheme.selectTheme');
+            }
+        });
+
+        // Mark the extension as activated
+        context.globalState.update('hasBeenActivated', true);
+    }
+
+
 	if(repository){
 
 		const branchType = getActiveBranchType(repository);

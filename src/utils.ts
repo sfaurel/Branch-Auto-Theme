@@ -106,7 +106,15 @@ export async function applySelectedTheme(branchType: BranchType) {
     }
 
     if (selectedTheme && selectedTheme?.includes("Select theme for")) {
-        vscode.window.showWarningMessage(`Theme for "${branchType}" branches is not configured. Please configure it`);
+        vscode.window.showWarningMessage(
+            `Theme for "${branchType}" branches is not configured. Please configure it`,
+            'Configure Now'
+        ).then(selection => {
+            if (selection === 'Configure Now') {
+                // Open the settings JSON file or a specific configuration page
+                vscode.commands.executeCommand('branchAutoTheme.selectTheme');
+            }
+        });
         return;
     }
 
