@@ -1,47 +1,64 @@
 import * as vscode from 'vscode';
-import { updateStatusBarItem, getActiveBranchType } from './utils';
+import { 
+	getActiveBranchType,
+	configureThemes,
+	switchToUserTheme,
+	update,
+	OFF_MODE
+} from './utils';
 
 let branchStatusBarItem: vscode.StatusBarItem;
-
 export function activate(context: vscode.ExtensionContext) {
 
-	const activateCommand = vscode.commands.registerCommand('branch-auto-theme.activate', async () => {
-		// init repository
-		const git = vscode.extensions.getExtension('vscode.git');
-		const repository = git?.exports.getAPI(1).repositories[0];
-		
-		if(repository){
-			// init status bar
-			branchStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-			context.subscriptions.push(branchStatusBarItem);
-			const branchType = getActiveBranchType(repository);
-			updateStatusBarItem(branchStatusBarItem, branchType);
-			branchStatusBarItem.show();
+	// init repository
+	const git = vscode.extensions.getExtension('vscode.git');
+	const repository = git?.exports.getAPI(1).repositories[0];
 
-			// add branch change listener
-			repository.state.onDidChange(() => {
+	// init status bar
+	branchStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
+	context.subscriptions.push(branchStatusBarItem);
+	branchStatusBarItem.show();
+
+
+	if(repository){
+
+		const branchType = getActiveBranchType(repository);
+		update(branchStatusBarItem, branchType);
+
+
+		// add branch change listener
+		repository.state.onDidChange(() => {
+			const mode = vscode.workspace.getConfiguration('branchAutoTheme').get<string>('mode');
+			if(mode !== OFF_MODE){
 				const branchType = getActiveBranchType(repository);
-				updateStatusBarItem(branchStatusBarItem, branchType);
-			});
-			
-			// add config change listener
-			vscode.workspace.onDidChangeConfiguration((event) => {
-				if (event.affectsConfiguration('branchAutoTheme')) {
-					const branchType = getActiveBranchType(repository);
-					updateStatusBarItem(branchStatusBarItem, branchType);
-				}
-			});
-		}
+				update(branchStatusBarItem, branchType);
+			}
+		});
+		
+		// add config change listener
+		vscode.workspace.onDidChangeConfiguration((event) => {
+			if (event.affectsConfiguration('branchAutoTheme')) {
+				const branchType = getActiveBranchType(repository);
+				update(branchStatusBarItem, branchType);
+			}
+		});
+	}
 
+
+
+	const activateCommand = vscode.commands.registerCommand('branch-auto-theme.activate', () => {
 		vscode.window.showInformationMessage('Branch Auto Theme is now active!');
 	});
 	
 	const deactivateCommand = vscode.commands.registerCommand('branch-auto-theme.deactivate', () => {
-		vscode.window.showInformationMessage('Branch Auto Theme is now inactive :(');
-		deactivate()
+		deactivate();
+	});
+
+	const configThemesCommand = vscode.commands.registerCommand('branchAutoTheme.selectTheme', () => {
+		configureThemes();
 	});
 	
-	context.subscriptions.push(activateCommand,deactivateCommand);
+	context.subscriptions.push(activateCommand,deactivateCommand,configThemesCommand);
 }
 
 
@@ -50,4 +67,7 @@ export function deactivate() {
 	if (branchStatusBarItem) {
 		branchStatusBarItem.dispose();
 	}
+
+	switchToUserTheme();
+	vscode.window.showInformationMessage('Branch Auto Theme is now inactive :(');
 }
