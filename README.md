@@ -3,12 +3,18 @@
 
 ## Features
 
+- **Editor Theme Switching**: Automatically switch editor themes based on the active branch type using `branchAutoTheme.branchThemeConfig`. This setting allows users to assign specific themes for different branch types (e.g., a "Red" theme for `Protected`, "Blue" for `Develop`). As users switch branches, the editor theme updates dynamically to reflect the active branch context.
 
-- Displays the current branch type directly in the status bar for developers who prefer a subtle, non-intrusive branch indication. Providing visibility into the active branch context with a status bar item for each branch type:
+- **Customizable branch mappings**: Users can configure their own branch types directly in the settings `branchAutoTheme.branchMappings` to match their specific workflow.
+
+- **Branch Type Status Bar Indicator**: Displays the current branch type directly in the status bar for developers who prefer a subtle, non-intrusive branch indication. Providing visibility into the active branch context with a status bar item for each branch type:
 
   ![Protected](https://img.shields.io/badge/⚠️_Protected-red) ![Develop](https://img.shields.io/badge/Develop-gray) ![Feature](https://img.shields.io/badge/Feature-gray) ![Unmanaged](https://img.shields.io/badge/⚠️_Unmanaged-yellow)
 
-- **Customizable branch mappings**: Users can configure their own branch types directly in the settings `branchAutoTheme.branchMappings` to match their specific workflow.
+- **Mode Selection**: Choose how branch type indicators are displayed with the `branchAutoTheme.mode` setting: `Theme`, `Status Bar`, `Theme and Status Bar`, or `Off`
+
+- **Theme Selection Command**: Easily assign themes for each branch type with the `branchAutoTheme.selectTheme` command. Lets users quickly choose and set a theme for each branch type through a dropdown.
+
 
 <!-- Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
@@ -26,20 +32,35 @@ If you have any requirements or dependencies, add a section describing those and
 
 In the settings, users can customize the branches that match each branch category, allowing them to configure specific branches to match their workflow.
 
-`branchAutoTheme.branchMappings`: Configure which Git branches correspond to each branch type. Values are comma-separated branch names or patterns that define which branches belong to each category.
+- `branchAutoTheme.mode`: Set `Theme`, `Status Bar`, `Theme and Status Bar`, or `Off` modes.
 
+- `branchAutoTheme.branchMappings`: Configure which Git branches correspond to each branch type. Values are comma-separated branch names or patterns that define which branches belong to each category.
 
-Example configuration:
+  Example configuration:
 
-```json
-{
-  "branchAutoTheme.branchMappings": {
-    "protected": "main, master",
-    "develop": "develop",
-    "feature": "feature/*"
+  ```json
+  {
+    "branchAutoTheme.branchMappings": {
+      "protected": "main, master",
+      "develop": "develop",
+      "feature": "feature/*"
+    }
   }
-}
-```
+  ```
+
+- `branchAutoTheme.branchThemeConfig`: Configure a specific theme for each branch type.
+
+  Example configuration:
+  ```json
+  {
+    "branchAutoTheme.branchThemeConfig": {
+        "protected": "Red",
+        "develop": "Tomorrow Night Blue",
+        "feature": "Solarized Dark",
+        "other": "Quiet Light"
+    }
+  }
+  ```
 
 <!-- 
 ## Known Issues
@@ -48,17 +69,11 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 ## Release Notes
 
-### 0.0.1
-
-Initial version of **Branch Auto Theme**, providing current branch context in status bar item
-- Detects the active branch type (Protected, Develop, Feature, Other).
-- Displays the corresponding type as status bar indicator.
-- Customizable Branch Mappings.
+Moved to [CHANGELOG.md](./CHANGELOG.md)
 
 ## Next Steps
 
-- [ ] Add theme mode for branch types.
-- [ ] Implement mode selector: "Theme", "Status Bar Item", "Both", or "Off".
-- [ ] Enhance error handling for unsupported branch patterns.
-
+- [x] Add theme mode for branch types.
+- [x] Implement mode selector: `Theme`, `Status Bar Item`, `Both`, or `Off`.
+- [ ] Work test cases
 Thank you to everyone who contributes ideas, reports bugs, or suggests improvements—your help makes this project better

@@ -24,12 +24,30 @@
         "command": "branch-auto-theme.deactivate",
         "title": "Deactivate",
         "category": "Branch Auto Theme"
+      },
+      {
+        "command": "branchAutoTheme.selectTheme",
+        "title": "Select theme for each branch types",
+        "category": "Branch Auto Theme"
       }
     ],
     "configuration": {
       "properties": {
+        "branchAutoTheme.mode": {
+          "type": "string",
+          "description": "Select the indicator mode: Theme only, Status Bar only, both Theme and Status Bar, or Off.",
+          "enum": [
+            "Theme",
+            "Status Bar",
+            "Theme and Status Bar",
+            "Off"
+          ],
+          "default": "Theme and Status Bar",
+          "order": 1
+        },
         "branchAutoTheme.branchMappings": {
           "type": "object",
+          "description": "Map a list of comma-separated branch names or patterns to branch type.",
           "properties": {
             "protected": {
               "type": "string",
@@ -46,11 +64,41 @@
           },
           "additionalProperties": false,
           "default": {
-						"protected": "main, master",
-						"develop": "develop",
-						"feature": "feature/*"
-					},
-          "markdownDescription": "Map a list of comma-separated branch names or patterns."
+            "protected": "main, master",
+            "develop": "develop",
+            "feature": "feature/*"
+          },
+          "order": 2
+        },
+        "branchAutoTheme.branchThemeConfig": {
+          "type": "object",
+          "description": "Select a theme for Branch Auto Theme to apply when switching branches.",
+          "properties": {
+            "protected": {
+              "type": "string",
+              "default": "Select theme for protected branches"
+            },
+            "develop": {
+              "type": "string",
+              "default": "Select theme for develop branches"
+            },
+            "feature": {
+              "type": "string",
+              "default": "Select theme for feature branches"
+            },
+            "other": {
+              "type": "string",
+              "default": "Select theme for other branches"
+            }
+          },
+          "additionalProperties": false,
+          "default": {
+            "protected": "Select theme for protected branches",
+            "develop": "Select theme for develop branches",
+            "feature": "Select theme for feature branches",
+            "other": "Select theme for other branches"
+          },
+          "order": 3
         }
       }
     }
